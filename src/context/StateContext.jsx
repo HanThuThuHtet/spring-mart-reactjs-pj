@@ -7,6 +7,9 @@ import { getData } from "../api";
 const StateContext = createContext();
 export const StateContextProvider = ({children}) => {
    
+    //search bar
+    const [search , setSearch] = useState("");
+
     const initialState = {
         productLists: []
     }
@@ -28,7 +31,7 @@ export const StateContextProvider = ({children}) => {
         getProducts();
     },[]);
 
-    const data = {state};
+    const data = {state,search,setSearch};
     return(
         <StateContext.Provider value={data}>
             {children}

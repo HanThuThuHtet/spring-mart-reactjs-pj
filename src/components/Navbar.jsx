@@ -2,9 +2,11 @@ import React from 'react'
 import {SiShopify} from "react-icons/si"
 import {FaSearch, FaShoppingCart} from "react-icons/fa"
 import {Link} from "react-router-dom"
+import { useStateContext } from '../context/StateContext'
 const Navbar = () => {
+    const {search , setSearch} = useStateContext();
   return (
-    <nav className='flex items-center justify-between bg-primary px-5 py-2 my-5 shadow-md'>
+    <nav className='flex items-center justify-between bg-primary px-5 py-2 my-5 shadow-md rounded-lg'>
         
         <Link to="/">
         <div className="flex items-center gap-2 cursor-pointer">
@@ -20,7 +22,7 @@ const Navbar = () => {
             </div>
             <div className="flex items-center gap-2 border rounded px-3 py-2">
                 <FaSearch />
-                <input type="text" className='outline-none bg-transparent' placeholder='search here'/>
+                <input value={search} onChange={e => setSearch(e.target.value)} type="text" className='outline-none bg-transparent' placeholder='search here'/>
             </div>
         </div>
     </nav>
