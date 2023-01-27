@@ -33,13 +33,18 @@ export const StateContextProvider = ({children}) => {
     },[]);
 
     useEffect(() => {
-        dispatch({type: "GET_PRODUCTS" , payload: productLists})
-    }, [productLists]);
+        dispatch({type: "GET_PRODUCTS" , payload: productLists});
+
+        const filterProducts = productLists.filter(product => product.title.toLowerCase().includes(search.toLocaleLowerCase()));
+        dispatch({type: "GET_PRODUCTS" , payload: filterProducts});
+    }, [productLists, search]);
 
 
     console.log(productLists);
 
     const data = {state,search,setSearch};
+
+
     return(
         <StateContext.Provider value={data}>
             {children}

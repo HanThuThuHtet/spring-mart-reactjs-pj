@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 import { useStateContext } from '../context/StateContext'
 const Navbar = () => {
     const {search , setSearch} = useStateContext();
+    //console.log(search);
   return (
     <nav className='flex items-center justify-between bg-primary px-5 py-2 my-5 shadow-md rounded-lg'>
         
