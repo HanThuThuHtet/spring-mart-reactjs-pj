@@ -4,15 +4,15 @@ import Card from '../components/Card';
 import { useStateContext } from '../context/StateContext'
 
 const Products = () => {
-  const {state: {productLists,search}}  = useStateContext();
+  const {state: {products}}  = useStateContext();
   //console.log(state);
   //console.log(productLists);
 
-  const [products , setProducts] = useState([]);
-  useEffect(() => {
-    setProducts(productLists);
+   //const [products , setProducts] = useState([]);
+  // useEffect(() => {
+  //   setProducts(productLists);
     
-  } , [productLists]);
+  // } , [productLists]);
   //console.log(products);
 
   return (

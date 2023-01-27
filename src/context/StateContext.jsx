@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
@@ -8,15 +8,16 @@ const StateContext = createContext();
 export const StateContextProvider = ({children}) => {
    
     //search bar
+    const [productLists , setProductList] = useState([]);
     const [search , setSearch] = useState("");
 
     const initialState = {
-        productLists: []
+        products: []
     }
     const reducer = (state , action) => {
         switch(action.type){
             case "GET_PRODUCTS":
-                return {...state , productLists: action.payload}
+                return {...state , products: action.payload}
             default:
                 return state;
         }
@@ -25,11 +26,18 @@ export const StateContextProvider = ({children}) => {
     const [state , dispatch ] = useReducer(reducer, initialState);    
     const getProducts = async() => {
         const data = await getData('/products');
-        dispatch({type: "GET_PRODUCTS", payload: data});
+        setProductList(data);
     }
     useEffect(() => {
         getProducts();
     },[]);
+
+    useEffect(() => {
+        dispatch({type: "GET_PRODUCTS" , payload: productLists})
+    }, [productLists]);
+
+
+    console.log(productLists);
 
     const data = {state,search,setSearch};
     return(
