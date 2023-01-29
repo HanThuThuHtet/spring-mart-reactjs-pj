@@ -1,5 +1,8 @@
 import React from 'react'
 import {AiFillStar} from "react-icons/ai"
+import {Link} from "react-router-dom"
+
+
 const Card = ({product}) => {
     //const {title , image , price , rating} = product;
   return (
@@ -13,7 +16,9 @@ const Card = ({product}) => {
         <p className='text-header font-bold text-xl my-3'>${product?.price}</p>
         <div>
             <button className='bg-secondary text-white px-5 py-2 rounded shadow-lg transform transition hover:scale-95'>Add to card</button>
-            <button className='bg-header text-white px-5 py-2 rounded shadow-lg ml-3 transform transition hover:scale-95'>Details</button>
+            <Link to={`/detail/${product.id}`}>
+              <button className='bg-header text-white px-5 py-2 rounded shadow-lg ml-3 transform transition hover:scale-95'>Details</button>
+            </Link>
         </div>
     </div>
   )

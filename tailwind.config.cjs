@@ -15,7 +15,7 @@ module.exports = {
         // "secondary" : "#ed7a6b",
         "danger" : "#e53170",
         "header" : "#0f0e17",
-        "info" : "#ff8906",
+        "info" : "#f98800",
         "gray1" : "#d1d1e9"
       }
     },
