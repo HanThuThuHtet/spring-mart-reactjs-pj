@@ -4,7 +4,8 @@ import Card from '../components/Card';
 import { useStateContext } from '../context/StateContext'
 
 const Products = () => {
-  const {state: {products}}  = useStateContext();
+  const {state: {products,cart}}  = useStateContext();
+  console.log(cart);
   //console.log(state);
   //console.log(productLists);
 
