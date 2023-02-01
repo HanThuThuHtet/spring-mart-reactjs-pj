@@ -19,14 +19,16 @@ const ProductDetail = () => {
     }
 
     const getProductByCategory = async() => {
-        setProductCat(await getData(`/products/category/${product.category}`));
+        const data = await getData(`/products/category/${product.category}`);
+        const filterData = data?.filter(item => item.id !== product.id );
+        setProductCat(filterData);
     }
 
 
     useEffect(() => {
         getProductDetail();
         getProductByCategory();
-    },[product]);
+    },[product,productCat]);
 
   return (
     <div className="">
@@ -49,7 +51,9 @@ const ProductDetail = () => {
 
                 <div className="">
                     <button onClick={() => dispatch({type: "ADD_TO_CART", payload: product})} className='bg-secondary text-white px-5 py-2 rounded shadow-lg transform transition hover:scale-95 w-40'>Add to card</button>
-                    <button className='border-2 border-secondary text-secondary px-4 py-1.5 rounded shadow-lg transform transition hover:scale-95 w-40 ml-4'>Buy Now</button>
+                    <Link to="./success">
+                        <button className='border-2 border-secondary text-secondary px-4 py-1.5 rounded shadow-lg transform transition hover:scale-95 w-40 ml-4'>Buy Now</button>
+                    </Link>
                 </div>
     
             </div>

@@ -19,10 +19,28 @@ export const StateContextProvider = ({children}) => {
         switch(action.type){
             case "GET_PRODUCTS":
                 return {...state , products: action.payload};
+
             case "ADD_TO_CART":
-                return {...state , cart:[...state.cart, {...action.payload, qty: 1}]};
+                // return {...state , cart:[...state.cart, {...action.payload, qty: 1}]};
+                const item = action.payload;
+                const isExisted = state.cart.find(cartItem => cartItem.id === item.id);
+                if(isExisted){
+                    return{
+                        ...state,cart: state.cart.map(cart => cart.id === item.id ? {...item} : {...cart})
+                        
+                    }
+                }else{
+                    return{
+                        ...state, cart:[...state.cart,{...item}]
+                    }
+                }
+
             case "REMOVE_FROM_CART":
-                return {...state, cart: state.cart.filter(item => item.id !== action.payload.id)}
+                return {...state, cart: state.cart.filter(item => item.id !== action.payload.id)};
+
+            case "CART_EMPTY":
+                return {...state, cart: (state.cart = [])};
+                
             default:
                 return state;
         }
