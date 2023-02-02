@@ -7,6 +7,8 @@ import ProductDetail from './pages/ProductDetail'
 import Cart from './pages/Cart'
 import Success from './pages/Success'
 import 'animate.css'
+import SuccessCheckut from './pages/SuccessCheckout'
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
         <Route path='/detail/:id' element={<ProductDetail />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/detail/:id/success' element={<Success />} />
+        <Route path='/success' element={<SuccessCheckut />} />
       </Routes>
     </div>
   )

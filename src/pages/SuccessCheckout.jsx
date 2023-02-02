@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Successimg from './img/success.png'
 
-const Success = () => {
+const SuccessCheckut = () => {
     const navigate = useNavigate();
   return (
     <div className='flex justify-center'>
@@ -13,7 +13,8 @@ const Success = () => {
     </div>
     </div>
     
+    
   )
 }
 
-export default Success
+export default SuccessCheckut
