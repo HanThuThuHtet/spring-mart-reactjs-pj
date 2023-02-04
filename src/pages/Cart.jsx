@@ -3,9 +3,32 @@ import { useStateContext } from '../context/StateContext'
 import { AiFillDelete, AiFillStar } from 'react-icons/ai';
 import {Link , useNavigate} from "react-router-dom";
 import EmptyCart from './img/emptycart.png';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useTransition } from 'react';
+import CartItem from '../components/CartItem';
 
 const Cart = () => {
     const {state:{cart}, dispatch} = useStateContext();
+
+    const [total , setTotal] = useState(0);
+    const [totalItem , setTotalItem] = useTransition("");
+    const incPrice = price => {
+        setTotal(total + price)
+    };
+    const decPrice = (price) => {
+        setTotal(total - price);
+    };
+    
+    const delPrice = (price) => {
+        setTotal(total - price);
+    }
+
+    useEffect(() => {
+        setTotal(cart.reduce((accumulator , currentvalue) => accumulator + currentvalue.price ,0));
+        
+    }, []);
+
     const navigate = useNavigate();
     const checkoutHandler = () => {
         dispatch({type : "CART_EMPTY"});
@@ -20,25 +43,16 @@ const Cart = () => {
             <div className='col-span-3  flex flex-col gap-5'>
                 {/* {cart?.map(item => <h1 key={item.id}>
                     {item.title}</h1>)} */}
-                {cart?.map(item => (
-                    <div key={item.id} className=" flex items-center shadow-lg p-4 rounded-lg w-[700px]">
-
-                        <img src={item?.image} className="h-32 px-8 " alt="" />
-
-                        <div className='flex flex-col'>
-                            <h3 className='text-header text-md font-bold tracking-wide my-3'>{item?.title}</h3>
-                            <p className='text-header font-bold text-lg my-3'>${item?.price}</p>
-                            <p>{item.qty}</p>
-                            <button onClick={() => dispatch({type:"REMOVE_FROM_CART", payload: item})}><AiFillDelete className='text-danger text-2xl' /></button>
-                        </div>
-                        
-                    </div>
-                ))}
+                {cart?.map(item => 
+                    <CartItem key={item.id} item={item} incPrice={incPrice} decPrice={decPrice} delPrice={delPrice} />
+                )}
             </div>
 
             <div className="col-span-2">
                 <div className='bg-gray-50 p-10 rounded'>
-                    <h1 className='text-3xl text-info font-bold'>Total Price - $1000</h1>
+                    
+                    <h3>{totalItem}</h3>
+                    <h1 className='text-3xl text-info font-bold'>Total Price - ${total}</h1>
                     
                         <button onClick={checkoutHandler} className='bg-secondary text-white px-10 py-2 rounded shadow-lg transform transition hover:scale-95 my-5'>Checkout</button>
                     
