@@ -27,7 +27,9 @@ const CartItem = ({item, incPrice , decPrice, delPrice}) => {
 
                         <div className='flex flex-col'>
                             <h3 className='text-header text-md font-bold tracking-wide mt-3 my-0'>{item?.title}</h3>
-                            <p className='text-header font-bold text-2xl my-3'>${item?.price * qty}</p>
+                            <p className='text-header font-bold text-2xl my-3'>
+                                ${item?.price * qty}
+                            </p>
                             <div className="flex gap-3">
                                 <AiFillMinusSquare onClick={decreaseQty} className='text-2xl text-info cursor-pointer' />
                                 <p className='text-lg'>{qty}</p>

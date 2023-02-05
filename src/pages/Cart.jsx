@@ -52,7 +52,7 @@ const Cart = () => {
                 <div className='bg-gray-50 p-10 rounded'>
                     
                     <h3>{totalItem}</h3>
-                    <h1 className='text-3xl text-info font-bold'>Total Price - ${total}</h1>
+                    <h1 className='text-3xl text-info font-bold'>Total Price - ${(total.toFixed(2))}</h1>
                     
                         <button onClick={checkoutHandler} className='bg-secondary text-white px-10 py-2 rounded shadow-lg transform transition hover:scale-95 my-5'>Checkout</button>
                     
